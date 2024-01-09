@@ -1,0 +1,14 @@
+BUILDING
+
+This was built using a small Makefile and one source code file.
+The source code is C++20 and the GCC-13 compiler suite was used to
+compile it.  One shell script ('ma') is also provided to setup a
+minimal environment for the make-build process.  Most any developer
+should be able to adapt this small distribution to build in their
+systemenvironment.
+
+What I do (in the end)?
+
+$ cd src
+$ ma
+
