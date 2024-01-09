@@ -135,7 +135,7 @@ struct page_info {
 /*
  * An entry kept for each visited directory.
  */
-VISITED_DIR {
+struct visited_dir {
 	dev_t		device;
 	ino_t		inode;
 	SLIST_ENTRY(visited_dir)	next;
