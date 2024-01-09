@@ -1,0 +1,34 @@
+#!/usr/extra/bin/ksh
+# MAKEWHATIS.CRON
+
+#
+# This is meant to run as a CRON job (or some other kind of background
+# job) to recreate the WHATIS databases for those MAN directories that
+# are writable.  Separate provision needs to be made for those special
+# MAN directories that are located in read-only filesystems. Your mileage
+# may vary (meaning adapt to your environment as necessary).
+#
+
+: ${USRLOCAL:=/usr/local}
+: ${LOCAL:=/opt/local}
+export USRLOCAL LOCAL
+
+PP=makewhatis
+LF=${HOME}/log/${PP}
+PATH=${HOME}/bin:${USRLOCAL}/bin:${LOCAL}/bin:${PATH}
+export PATH
+
+if haveprogram pathenum ; then
+  pathenum MANPATH | while read D ; do
+    if [[ -d "${D}" ]] && [[ -w ${D} ]] ; then
+      makewhatis $D
+    fi
+  done
+else
+  print -u 2 "${PP}: could not find the PATHENUM program"
+fi
+
+DA=$( date '+%Y%m%d%H%M%S' )
+print -- "${PP}\t${DA} makewhatis completed" >> ${LF}
+
+
