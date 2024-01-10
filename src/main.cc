@@ -459,7 +459,6 @@ static FILE *open_output(char *name, int dir_fd,cchar *rel_name) noex {
 #if	CF_TURNOFFREFUSAL
 	if (statbuf.st_nlink > 1) {
 		warnx("%s: is a hardlink", name);
-		close(output_fd);
 		exit_code = 1;
 		return nullptr;
 	}
@@ -467,10 +466,11 @@ static FILE *open_output(char *name, int dir_fd,cchar *rel_name) noex {
 	output = fdopen(output_fd, "w");
 	if (output == nullptr) {
 		if (!optquiet) warn("%s", name);
-		exit_code = 1;
-		return nullptr;
+		close(output_fd) ;
+		exit_code = 1 ;
+		return nullptr ;
 	}
-	return output;
+	return output ;
 }
 /* end subroutine (open_output) */
 
