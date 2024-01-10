@@ -446,7 +446,7 @@ static FILE *open_output(char *name, int dir_fd,cchar *rel_name) noex {
 #endif
 	output_fd = openat(dir_fd, rel_name,of, 0644);
 	if (output_fd == -1) {
-		warn("%s", name);
+		if (!optquiet) warn("%s", name);
 		exit_code = 1;
 		return nullptr;
 	}
