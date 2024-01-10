@@ -52,22 +52,62 @@
 
 : ${USRLOCAL:=/usr/local}
 : ${LOCAL:=/opt/local}
-export USRLOCAL LOCAL
+: ${TMPDIR:=/tmp}
+export USRLOCAL LOCAL TMPDIR
 
 PP=makewhatis
 LF=${HOME}/log/${PP}
 PATH=${HOME}/bin:${USRLOCAL}/bin:${LOCAL}/bin:${PATH}
 export PATH
 
+function finder {
+  integer ex=1
+  typeset MDIR=$1
+  typeset WI=${MDIR}/whatis
+  typeset TF=${TMPDIR}/mwi${$}.out
+  find $MDIR -newer $WI -print > ${TF}
+  if [[ -s ${TF} ]] ; then
+    ex=0
+  fi
+  rm -f ${TF}
+  return $ex
+} 
+
+function whatisneed {
+  typeset MDIR=$1 WI=
+  integer ex=1
+  if [[ -d "${MDIR}" ]] ; then
+    WI=${MDIR}/whatis
+    if [[ -w ${MDIR} ]] ; then
+      if [[ -r ${WI} ]] ; then
+        finder $MDIR
+        ex=$?
+      else
+        ex=0
+      fi
+    else
+      if [[ -w "${WI}" ]] ; then
+        finder $MDIR
+        ex=$?
+      fi
+    fi
+  fi
+  return $ex
+}
+
 if haveprogram pathenum ; then
   pathenum MANPATH | while read D ; do
     if [[ -d "${D}" ]] ; then
       if [[ -w ${D} ]] ; then
-        makewhatis $D
+        if whatisneed $D ; then
+          makewhatis $D
+        fi
       else
         WI=${D}/whatis
         if [[ -w ${WI} ]] ; then
-	  makewhatis -o ${WI} $D
+          if whatisneed $D ; then
+	    makewhatis -o ${WI} $D
+          fi
         fi
       fi
     fi
