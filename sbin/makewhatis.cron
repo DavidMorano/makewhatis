@@ -9,6 +9,47 @@
 # may vary (meaning adapt to your environment as necessary).
 #
 
+# Notes:
+#
+# 1. Handling non-writable MAN directories
+#    Non-writable MAN directories can be quite common on some systems.
+#    These (non-writable MAN directories) can occur for a variety of
+#    reasons that will not be further elaborated here, but which might 
+#    otherwise be fairly obvious.
+#    There are many ways to handle non-writable MAN directories.
+#    One such way (a little bit interesting) is shown below.
+#    This is actual code used in the real world, so this method might
+#    be useful on your systems also.  It requires that the non-writable
+#    MAN directory contains a symbolic link for the file 'whatis'
+#    (located immediatly under the top-level directory as per usual)
+#    to a known writeable filesystem (or other place) outside of 
+#    the read-only MAN directory.  Then when the WHATIS indexing takes
+#    place (like with using a script-program like this very one),
+#    the program detects that the MAN directory is not writable and
+#    in that case proceeds to check if the corresponding 'whatis' file
+#    under it is writable.  If the 'whatis' file is writable, the 
+#    MAKEWHATIS program is called with the '-o' option to redirect
+#    the output to the 'whatis' file.  This action (using the '-o' option)
+#    circumvents the normal behavior of the MAKEWHATIS program to 
+#    atomically linka new 'whatis' file into place in the corresponding
+#    MAN directory. Yes, the operation is not atomic, but if your
+#    MAN directory is located on a read-only filesystem, then there 
+#    are not going to be any updates of the MAN directory at all
+#    while it (the MAN directory) is mounted read-only.  So only
+#    a single WHATIS database (contained in the 'whatis" file) need
+#    be created anytime a new MAN page is added to the MAN directory
+#    (presumably when it is writeable at some point).  Enjoy.
+#
+# 2. Possible future enhancement
+#
+#    It is conceivable that a future version of the MAKEWHATIS prorgam
+#    might have this above logic incorporated so that the distinction
+#    between writable and non-writable MAN directories is more transparent
+#    to programs that update the WHATIS database (like this very program
+#    here).
+#
+#
+
 : ${USRLOCAL:=/usr/local}
 : ${LOCAL:=/opt/local}
 export USRLOCAL LOCAL
@@ -20,8 +61,15 @@ export PATH
 
 if haveprogram pathenum ; then
   pathenum MANPATH | while read D ; do
-    if [[ -d "${D}" ]] && [[ -w ${D} ]] ; then
-      makewhatis $D
+    if [[ -d "${D}" ]] ; then
+      if [[ -w ${D} ]] ; then
+        makewhatis $D
+      else
+        WI=${D}/whatis
+        if [[ -w ${WI} ]] ; then
+	  makewhatis -o ${WI} $D
+        fi
+      fi
     fi
   done
 else
