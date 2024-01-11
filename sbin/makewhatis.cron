@@ -65,7 +65,7 @@ function finder {
   typeset MDIR=$1
   typeset WI=${MDIR}/whatis
   typeset TF=${TMPDIR}/mwi${$}.out
-  find $MDIR -newer $WI -print > ${TF}
+  find -L $MDIR -newer $WI -print > ${TF}
   if [[ -s ${TF} ]] ; then
     ex=0
   fi
