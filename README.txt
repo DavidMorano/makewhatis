@@ -18,13 +18,13 @@ placed into an incorrect type).
 Unlike the previous version, this version loves to follow symbolic
 links.  This ability to follow symbolic (or hard) links allows it
 to operate in an environment where actual MAN pages are held
-separately from the distribution directoy (in a writable filesystem)
-while the software distribution itself is held in a read-only
-filesystem.  Several other (more legacy) software distributions
-also routinely used symbolic links for the 'man' subdirectoy located
-just under the head of the software distribution head.  By not
-following those symbolic links, the associated manual pages were
-not made available to the |apropos(1)| utility.
+separately from the distribution directory (often in a writable
+filesystem) while the software distribution itself is held in a
+read-only filesystem.  Several other (more legacy) software
+distributions also routinely used symbolic links for the 'man'
+subdirectoy located just under the head of the software distribution
+head.  By not following those symbolic links, the associated manual
+pages were not made available to the |apropos(1)| utility.
 
 = Security concerns
 
