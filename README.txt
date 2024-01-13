@@ -2,8 +2,8 @@ MAKEWHATIS
 
 This is a modified version of the MAKEWHATIS program as distributed
 by Apple.  It was modified to follow symbolic links to manual page
-directories. This particular version was originally written by John
-Rochester. that version (just preceding this one) was itself inspired
+directories.  This particular version was originally written by John
+Rochester.  That version (just preceding this one) was itself inspired
 by the original version by Wolfram Schneider (which was written in
 Perl).
 
@@ -22,7 +22,7 @@ separately from the distribution directoy (in a writable filesystem)
 while the software distribution itself is held in a read-only
 filesystem.  Several other (more legacy) software distributions
 also routinely used symbolic links for the 'man' subdirectoy located
-just under the head of the software distribution head. By not
+just under the head of the software distribution head.  By not
 following those symbolic links, the associated manual pages were
 not made available to the |apropos(1)| utility.
 
@@ -39,7 +39,7 @@ conifigured and administered system.
 
 = Other enhancements
 
-There is one additional option provided now. It is the 'Q' (capital
+There is one additional option provided now.  It is the 'Q' (capital
 Q character).  This option suppresses most of the most annoying
 error (or warning) messages when a directory is either not available
 or not writable.
