@@ -31,14 +31,16 @@
 #    MAKEWHATIS program is called with the '-o' option to redirect
 #    the output to the 'whatis' file.  This action (using the '-o' option)
 #    circumvents the normal behavior of the MAKEWHATIS program to 
-#    atomically linka new 'whatis' file into place in the corresponding
-#    MAN directory. Yes, the operation is not atomic, but if your
-#    MAN directory is located on a read-only filesystem, then there 
-#    are not going to be any updates of the MAN directory at all
-#    while it (the MAN directory) is mounted read-only.  So only
-#    a single WHATIS database (contained in the 'whatis" file) need
-#    be created anytime a new MAN page is added to the MAN directory
-#    (presumably when it is writeable at some point).  Enjoy.
+#    atomically link a new 'whatis' file into place in the corresponding
+#    MAN directory.  Yes, this alternative operation is not atomic, but
+#    if your MAN directory is located on a read-only filesystem, then
+#    there are not going to be any updates of the MAN directory at all
+#    while it (the MAN directory) is mounted read-only.  So only a single
+#    WHATIS database (contained in the 'whatis" file) need be created
+#    anytime a new MAN page is added to the MAN directory (presumably
+#    when it is writeable at some point).  Enjoy.
+#
+
 #
 # 2. Possible future enhancement
 #
@@ -55,8 +57,9 @@
 : ${TMPDIR:=/tmp}
 export USRLOCAL LOCAL TMPDIR
 
-PP=makewhatis
-LF=${HOME}/log/${PP}
+BN=${0##*/}
+PN=${BN%.*}
+LF=${HOME}/log/${PN}
 PATH=${HOME}/bin:${USRLOCAL}/bin:${LOCAL}/bin:${PATH}
 export PATH
 
@@ -113,10 +116,10 @@ if haveprogram pathenum ; then
     fi
   done
 else
-  print -u 2 "${PP}: could not find the PATHENUM program"
+  print -u 2 "${PN}: could not find the PATHENUM program"
 fi
 
 DA=$( date '+%Y%m%d%H%M%S' )
-print -- "${PP}\t${DA} makewhatis completed" >> ${LF}
+print -- "${PN}\t${DA} makewhatis completed" >> ${LF}
 
 
