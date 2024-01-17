@@ -40,8 +40,6 @@
 #    anytime a new MAN page is added to the MAN directory (presumably
 #    when it is writeable at some point).  Enjoy.
 #
-
-#
 # 2. Possible future enhancement
 #
 #    It is conceivable that a future version of the MAKEWHATIS prorgam

@@ -43,7 +43,7 @@
 
 *****/
 
-/* Copyright © 2017 David A­D­ Morano.  All rights reserved. */
+/* Copyright © 2024 David A­D­ Morano.  All rights reserved. */
 
 /*******************************************************************************
 
