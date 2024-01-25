@@ -91,7 +91,6 @@ __FBSDID("$FreeBSD: src/usr.bin/makewhatis/makewhatis.c,v 1.9 2002/09/04 23:29:0
 #define DEFAULT_MANPATH		"/usr/share/man"
 #define LINE_ALLOC		4096
 
-
 #define	PAGE_INFO		struct page_info
 #define	VISITED_DIR		struct visited_dir
 #define	SBUF			struct sbuf
@@ -112,7 +111,7 @@ using std::nullptr_t ;
 
 /* local typedefs */
 
-typedef char *edited_copy(char *from,char *to,int length) noex ;
+typedef char *(*edited_copy)(char *from,char *to,int length) noex ;
 typedef const int	cint ;
 typedef const char	cchar ;
 typedef const void	cvoid ;
