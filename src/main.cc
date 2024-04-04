@@ -34,12 +34,12 @@
 /* revision history:
 
 	+ 2024-01-08, David A.D. Morano
-	Updated (converted to C++ from C. And also fixed a number
-	of type mismatches and one of which turned out to be a bad
-	error (bug).  I fixed the bug (you have find it in the code
-	below). There was one suspcicious code section that I left
+	Updated (converted to C++ from C). Also fixed a number
+	of type mismatches, one of which turned out to be a bad
+	error (bug).  I fixed the bug (you can find it in the code
+	below).  There was one suspcicious code section that I left
 	alone, but it might be checked by someone who knows what it
-	is supposed to do.  It is marked in the code below as 'TODO'.
+	is supposed to do.  It is marked in the code below with 'TODO'.
 
 *****/
 
@@ -50,7 +50,7 @@
 	This is an implementation of the famous |MAKEWHATIS| facility.
 	Although a number of implementations are (or were) written in
 	SHELL language (POSIX® compliant generally), this version is
-	written in C/C++.  It was originally written in C-lang, but
+	written in C-C++.  It was originally written in C-lang, but
 	was converted to C++ by David Morano.
 
 	For how to use this program, see the various MAN pages on it
