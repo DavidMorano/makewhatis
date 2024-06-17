@@ -117,7 +117,7 @@ else
   print -u 2 "${PN}: could not find the PATHENUM program"
 fi
 
-DA=$( date '+%Y%m%d%H%M%S' )
+DA=$( date '+%Y%m%d-%H%M%S' )
 print -- "${PN}\t${DA} makewhatis completed" >> ${LF}
 
 
