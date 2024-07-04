@@ -6,7 +6,7 @@ ALL= $(T).x
 
 
 # extra flags here (usually to turn OFF warnings
-CCFLAGSEXTRA= -Wno-format-truncation
+CXXFLAGSEXTRA= -Wno-format-truncation
 
 
 BINDIR= $(REPOROOT)/bin
@@ -50,7 +50,7 @@ LIBS= -lz
 # flag setting
 CPPFLAGS= $(DEFS) $(INCDIRS) $(MAKECPPFLAGS)
 CFLAGS= $(MAKECFLAGS)
-CCFLAGS= $(MAKECCFLAGS) $(CCFLAGSEXTRA)
+CXXFLAGS= $(MAKECXXFLAGS) $(CXXFLAGSEXTRA)
 ARFLAGS= $(MAKEARFLAGS)
 LDFLAGS= $(MAKELDFLAGS)
 
@@ -78,7 +78,7 @@ all:			$(ALL)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
 
 .cc.o:
-	$(CXX)  $(CPPFLAGS) $(CCFLAGS) -c $<
+	$(CXX)  $(CPPFLAGS) $(CXXFLAGS) -c $<
 
 
 $(T).x:			$(OBJ_MAKEWHATIS)
