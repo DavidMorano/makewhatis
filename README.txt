@@ -22,9 +22,10 @@ separately from the distribution directory (often in a writable
 filesystem) while the software distribution itself is held in a
 read-only filesystem.  Several other (more legacy) software
 distributions also routinely used symbolic links for the 'man'
-subdirectoy located just under the head of the software distribution
-head.  By not following those symbolic links, the associated manual
-pages were not made available to the |apropos(1)| utility.
+subdirectoy located just under the head of the software distribution.
+With the previous version of this program not following symbolic
+links, the associated manual pages for those distribution using
+symbolic links were not available to the |apropos(1)| utility.
 
 = Security concerns
 
